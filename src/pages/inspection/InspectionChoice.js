@@ -58,18 +58,18 @@ function InspectionChoice() {
     }
   }, []);
 
-  console.log(modify);
+  console.log("modify : ",modify);
   useEffect(() => {
     if (modify?.data.index !== 99) {
       setModifyResume(undefined);
-      setModifyResume(resume?.data.SelfIntroduction);
+      setModifyResume(resume?.data?.SelfIntroduction);
       setModifyResume(
         resume?.data.SelfIntroduction.map((state, index) => {
           if (index === modify?.data.index) {
             return {
               ...modifyResume,
-              content: modify?.data.SelfIntroduction[index].content,
-              title: modify?.data.SelfIntroduction[index].title,
+              content: modify?.data?.SelfIntroduction[index].content,
+              title: modify?.data?.SelfIntroduction[index].title,
             };
           } else {
             return {
@@ -83,7 +83,7 @@ function InspectionChoice() {
     } else {
       setModifyResume(modify?.data.SelfIntroduction);
     }
-  }, [resume?.data.SelfIntroduction]);
+  }, [resume?.data?.SelfIntroduction]);
 
   useEffect(() => {
     if (newResume?.data && newResume?.status === 200 && btn == true) {
@@ -94,7 +94,7 @@ function InspectionChoice() {
       }
       const byteArray = new Uint8Array(byteNumbers);
       const blob = new Blob([byteArray], { type: "application/pdf" });
-      saveAs(blob, newResume.data.title + ".pdf");
+      saveAs(blob, newResume.data.title ? newResume.data.title : userInfo.name  + ".pdf");
       setBtn(false);
     }
   }, [newResume]);
@@ -126,7 +126,7 @@ function InspectionChoice() {
       }
       div.style.overflow = orginOverflow;
       setCount(allCanvases.length);
-      allCanvases.forEach((canvas, i) => {
+      allCanvases.forEach((canvas) => {
         canvas.toBlob((blob) => {
           setImg((previmg) => [...previmg, blob]);
         });
@@ -269,8 +269,10 @@ function InspectionChoice() {
                                             <div className={style.Awards}>
                                                 <h5 className={style.text}>AWARDS & CERTIFICATIONS</h5>
                                                 {
-                                                    resume.data?.AwardsCertifications.map((awa) => (
-                                                        <p className={style.text}>{awa}</p>
+                                                    resume.data?.AwardsCertifications.map((awa , index) => (
+                                                        <div key={index}>
+                                                            <p className={style.text}>{awa}</p>
+                                                        </div>
                                                     ))
                                                 }
                                             </div>

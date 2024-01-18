@@ -58,11 +58,11 @@ function InspectionChoice() {
     }
   }, []);
 
-  console.log(modify);
+  console.log("modify : ",modify);
   useEffect(() => {
     if (modify?.data.index !== 99) {
       setModifyResume(undefined);
-      setModifyResume(resume?.data.SelfIntroduction);
+      setModifyResume(resume?.data?.SelfIntroduction);
       setModifyResume(
         resume?.data.SelfIntroduction.map((state, index) => {
           if (index === modify?.data.index) {
@@ -81,9 +81,9 @@ function InspectionChoice() {
         })
       );
     } else {
-      setModifyResume(modify?.data.SelfIntroduction);
+      setModifyResume(modify?.Object?.data.SelfIntroduction);
     }
-  }, [resume?.data.SelfIntroduction]);
+  }, [resume?.data?.SelfIntroduction]);
 
   useEffect(() => {
     if (newResume?.data && newResume?.status === 200 && btn == true) {
@@ -94,7 +94,7 @@ function InspectionChoice() {
       }
       const byteArray = new Uint8Array(byteNumbers);
       const blob = new Blob([byteArray], { type: "application/pdf" });
-      saveAs(blob, newResume.data.title + ".pdf");
+      saveAs(blob, newResume.data.title ? newResume.data.title : userInfo.name  + ".pdf");
       setBtn(false);
     }
   }, [newResume]);
@@ -126,7 +126,7 @@ function InspectionChoice() {
       }
       div.style.overflow = orginOverflow;
       setCount(allCanvases.length);
-      allCanvases.forEach((canvas, i) => {
+      allCanvases.forEach((canvas) => {
         canvas.toBlob((blob) => {
           setImg((previmg) => [...previmg, blob]);
         });
@@ -269,9 +269,10 @@ function InspectionChoice() {
                                             <div className={style.Awards}>
                                                 <h5 className={style.text}>AWARDS & CERTIFICATIONS</h5>
                                                 {
-
-                                                    resume.data?.AwardsCertifications.map((awa) => (
-                                                        <p className={style.text}>{awa}</p>
+                                                    resume.data?.AwardsCertifications.map((awa , index) => (
+                                                        <div key={index}>
+                                                            <p className={style.text}>{awa}</p>
+                                                        </div>
                                                     ))
                                                 }
                                             </div>
@@ -284,19 +285,22 @@ function InspectionChoice() {
                                             <p className={style.Line}></p>
                                             <h3 className={style.text}>SKILLS</h3>
                                             <div className={style.skillDev}>
-                                                {resume.data.Skills.map((skille) => (
+                                                {resume.data.Skills.map((skille , index) => (
+                                                  <div key={index}>
                                                     <p className={style.text}>{skille}</p>
+                                                  </div>
+                                
                                                 ))}
                                             </div>
                                             <p className={style.Line}></p>
                                             <div className={style.ExperienceDev}>
                                                 <h3 className={style.text}>EXPERIENCE</h3>
                                                 {
-                                                    resume.data.Experience.map((exp) => (
-                                                        <>
+                                                    resume.data.Experience.map((exp, index) => (
+                                                        <div key={index}>
                                                             <h5 className={style.text}>{exp.company}</h5>
                                                             <h6 className={style.text}>{exp.duration}</h6>
-                                                        </>
+                                                        </div>
                                                     ))
                                                 }
                                             </div>
@@ -304,11 +308,11 @@ function InspectionChoice() {
                                             <div className={style.ProjectsDev}>
                                                 <h3 className={style.text}>Projects</h3>
                                                 {
-                                                    resume.data.Projects.map((project) => (
-                                                        <>
+                                                    resume.data.Projects.map((project ,index) => (
+                                                        <div key={index}>
                                                             <h5 className={style.text}>{project.ProjectsTitle}</h5>
                                                             <h6 className={style.text}>{project.ProjectsContent}</h6>
-                                                        </>
+                                                        </div>
                                                     ))
                                                 }
                                             </div>

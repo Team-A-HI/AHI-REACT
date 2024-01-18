@@ -146,7 +146,7 @@ function InspectionMain() {
                     <div className={modalStyle.title_head}>
                       <h4 className={modalStyle.title1}>자소서 번호</h4>
                       <h4 className={modalStyle.title2}>자소서 제목</h4>
-                      <h4 className={modalStyle.title3}>자소서 생성일</h4>z1
+                      <h4 className={modalStyle.title3}>자소서 생성일</h4>
                     </div>
                     <div className={modalStyle.resumeDev}>
                       {resume?.data.map((res) => (

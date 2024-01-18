@@ -54,7 +54,8 @@ function CompanyDetails() {
         height: "auto",
         marginTop: "30px",
         boxShadow: "1px 5px 20px rgba(0, 0, 0, 0.1)",
-        borderRadius: "25px"
+        borderRadius: "25px",
+        border: "none" 
     }
 
 
@@ -143,6 +144,7 @@ function CompanyDetails() {
                             ))}</div>
                             <div className={style.requirement}>경력 : {posting?.postingExperienceList.map((experience, index) => (
                                 <span key={index}>{experience.experienceLevel}{index < posting?.postingExperienceList.length -1 ? ',' : ''}</span>))}</div>
+                            <div>포지션 : {posting?.position}</div>
                         </div>
                         <div className={style.titleText3}>
                             <p style={{ paddingBottom: '20px' }}><b>근무 조건</b></p>
@@ -157,13 +159,15 @@ function CompanyDetails() {
                 <div id="details" className={style.detailsContainer}>
                     <div className={style.details}>
                         <p>상세정보</p>
-                        <div className={style.quill}>
-                            <ReactQuill style={ quillStyle}
+                        <div className={style.quillWrapper}>
+                            <div className={style.quill}>
+                                <ReactQuill style={ quillStyle }
 
-                            value={ posting?.content}
-                            readOnly={true}
-                            modules={modules}
-                            />
+                                value={ posting?.content}
+                                readOnly={true}
+                                modules={modules}
+                                />
+                            </div>
                         </div>
                         </div>
                     
@@ -174,18 +178,17 @@ function CompanyDetails() {
 
                     <div className={style.companyInfoDetails}>
                         
-                        <div>회사명: {posting?.company?.company}</div>
-                        <div>기업 형태 : {posting?.company?.companyType}</div>
-                        <div>사원수 : {posting?.company?.employeesNumber}</div>
-                        <div>설립일 : {posting?.company?.establishmentDate}</div>
-                        <div>대표 이름 :{posting?.company?.name}</div>
-                        <div>기업 페이지: <a href={posting?.company?.companyHomepage} target="_blank" rel="noopener noreferrer">{posting?.company?.companyHomepage}</a></div>
-                        <div>상세 주소 :{posting?.location}</div>
+                        <div><b>회사명</b>: {posting?.company?.company}</div>
+                        <div><b>기업 형태</b> : {posting?.company?.companyType}</div>
+                        <div><b>사원수</b> : {posting?.company?.employeesNumber}</div>
+                        <div><b>설립일</b> : {posting?.company?.establishmentDate}</div>
+                        <div><b>대표 이름</b> :{posting?.company?.name}</div>
+                        <div><b>기업 페이지</b>: <a href={posting?.company?.companyHomepage} target="_blank" rel="noopener noreferrer">{posting?.company?.companyHomepage}</a></div>
+                        <div><b>상세 주소</b> :{posting?.location}</div>
 
                     </div>
                 </div>
 
-                {/* ... (다른 JSX 코드) */}
 
             {posting?.company?.companyId === companyCode && (
                 <button className={style.deleteButton} onClick={() => onClickDeleteHandler(posting?.postingCode)}>

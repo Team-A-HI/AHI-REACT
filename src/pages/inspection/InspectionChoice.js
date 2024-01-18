@@ -68,8 +68,8 @@ function InspectionChoice() {
           if (index === modify?.data.index) {
             return {
               ...modifyResume,
-              content: modify?.data?.SelfIntroduction[index].content,
-              title: modify?.data?.SelfIntroduction[index].title,
+              content: modify?.data.SelfIntroduction[index].content,
+              title: modify?.data.SelfIntroduction[index].title,
             };
           } else {
             return {
@@ -81,7 +81,7 @@ function InspectionChoice() {
         })
       );
     } else {
-      setModifyResume(modify?.data.SelfIntroduction);
+      setModifyResume(modify?.Object?.data.SelfIntroduction);
     }
   }, [resume?.data?.SelfIntroduction]);
 
@@ -285,19 +285,22 @@ function InspectionChoice() {
                                             <p className={style.Line}></p>
                                             <h3 className={style.text}>SKILLS</h3>
                                             <div className={style.skillDev}>
-                                                {resume.data.Skills.map((skille) => (
+                                                {resume.data.Skills.map((skille , index) => (
+                                                  <div key={index}>
                                                     <p className={style.text}>{skille}</p>
+                                                  </div>
+                                
                                                 ))}
                                             </div>
                                             <p className={style.Line}></p>
                                             <div className={style.ExperienceDev}>
                                                 <h3 className={style.text}>EXPERIENCE</h3>
                                                 {
-                                                    resume.data.Experience.map((exp) => (
-                                                        <>
+                                                    resume.data.Experience.map((exp, index) => (
+                                                        <div key={index}>
                                                             <h5 className={style.text}>{exp.company}</h5>
                                                             <h6 className={style.text}>{exp.duration}</h6>
-                                                        </>
+                                                        </div>
                                                     ))
                                                 }
                                             </div>
@@ -305,11 +308,11 @@ function InspectionChoice() {
                                             <div className={style.ProjectsDev}>
                                                 <h3 className={style.text}>Projects</h3>
                                                 {
-                                                    resume.data.Projects.map((project) => (
-                                                        <>
+                                                    resume.data.Projects.map((project ,index) => (
+                                                        <div key={index}>
                                                             <h5 className={style.text}>{project.ProjectsTitle}</h5>
                                                             <h6 className={style.text}>{project.ProjectsContent}</h6>
-                                                        </>
+                                                        </div>
                                                     ))
                                                 }
                                             </div>

@@ -2,7 +2,7 @@ import style from './WriteInfo.module.css'
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import { useState, useEffect } from "react";
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate  } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { callPostingAPI, calltestAPI } from '../../apis/postingAPICalls';
 
@@ -11,7 +11,16 @@ function WriteInfo() {
     const dispatch = useDispatch();
     const [content, setContent] = useState('');
     const location = useLocation();
+    const navigate = useNavigate ();
     const dataObject = location.state ? location.state.dataObject : null;
+
+    const companyCodeJSON  = sessionStorage?.getItem("userInfo")
+
+    const parsedData = JSON.parse(companyCodeJSON);
+
+    const companyCode = parsedData?.companyEntity?.companyId;
+
+    const memberCode = parsedData?.id;
 
     useEffect(() => {
         document.body.classList.add(style.companyRegistBody);
@@ -75,7 +84,8 @@ function WriteInfo() {
     
         dispatch(callPostingAPI({
             form: formData,
-            companyCode : 1,
+            companyCode : companyCode,
+            navigate :navigate
         }));
         
     }

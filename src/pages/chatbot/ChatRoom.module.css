@@ -163,7 +163,7 @@
 
 /* ========================== 채팅창 메세지, 말풍선 디자인 ========================== */
 
-/* 수정된 클래스명에 대한 CSS */
+
 .userMessage {
     display: flex;
     justify-content: flex-end;
@@ -207,6 +207,7 @@
   .chattingList {
     height: calc(100% - 90px); /* 기존 높이에서 입력창 높이만큼 뺌 */
     width: 100%;
+    min-width: 100%;
     max-height: calc(100vh - 140px); /* 채팅창 최대 높이 설정 */
     overflow-y: auto; /* 세로 스크롤바 표시 */
     margin: 0px auto;
@@ -221,3 +222,48 @@
     display: none; /* Webkit 기반 브라우저에 적용되는 속성 */
   }
 
+  .resumeButton {
+    width: 230px;
+    height: 70px;
+    border-radius: 50px;
+    background-color: #c2defd;
+    cursor: pointer;
+    justify-content: center;
+    color: rgb(96, 95, 98);
+    font-family: "Pretendard";
+    display: flex;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    align-items: center;
+    border: none;
+    font-size: 20px;
+    font-weight: bold;
+    margin-left: 47px;
+    border: 3px solid #9fcbfd;
+  }
+
+
+  .resumeButton:hover {
+    width: 230px;
+    height: 70px;
+    border-radius: 50px;
+    background-color: #dbebfc;
+    cursor: pointer;
+    justify-content: center;
+    color:rgb(96, 95, 98);
+    font-family: "Pretendard";
+    display: flex;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    align-items: center;
+  
+    font-size: 20px;
+    font-weight: bold;
+    margin-left: 47px;
+  }
+
+  .chatbotLoading {
+    margin-left: 5px;
+    margin-right: 5px;
+    color: rgb(59, 63, 78);
+  }

@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import styles from './LoginForm.module.css';
 import {  Link,useNavigate } from "react-router-dom";
 import axios from 'axios';
-
+const serverIp = process.env.REACT_APP_SPRING_APP_SERVER_IP;
+const serverPort = process.env.REACT_APP_SPRING_APP_SERVER_PORT;
 const LoginForm = () => {
     const navigate = useNavigate();
     const [loginData, setLoginData] = useState({
@@ -23,23 +24,18 @@ const LoginForm = () => {
         formData.append('username', loginData.username);
         formData.append('password', loginData.password);
 
-        axios.post(`/login`,formData.toString())
+        axios.post(`http://${serverIp}:${serverPort}/login`,formData.toString(),{ withCredentials: true })
             .then(response => {
 
                 if(response.data.memberEntity.password==='N'){
-                    // localStorage.setItem('isLoggedIn', 'true');
-                    // localStorage.setItem('userInfo', JSON.stringify(response.data)); 
                     sessionStorage.setItem('userInfo', JSON.stringify(response.data.memberEntity));
-                    console.log(JSON.stringify(response.data.memberEntity))
                     navigate('/');
                 }
             })
             .catch(error => {
                 if (error.response && error.response.status === 401) {
-                    // 서버에서 보낸 실패 메시지 사용
                     alert(error.response.data.message);
                 } else {
-                    // 기타 에러 처리
                     console.error('로그인 요청 에러: ', error);
                 }
             })
@@ -64,6 +60,7 @@ const LoginForm = () => {
         <div className={styles.links}>
         <Link to="/findForm">ID/PW찾기</Link>
           <Link to="/joinForm">회원가입</Link>
+          <Link to="/joinFormCompany">비지니스 회원가입</Link>
         </div>
       </div>
         </form>
